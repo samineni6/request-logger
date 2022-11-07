@@ -14,8 +14,8 @@ pipeline {
     
     stage('Build Image') {
       steps {
-      sh "docker build -t brainupgrade/request-logger:${env.BUILD_ID} ."
-      sh "docker tag brainupgrade/request-logger:${env.BUILD_ID} brainupgrade/request-logger:latest"
+      sh "docker build -t samineni6/request-logger:${env.BUILD_ID} ."
+      sh "docker tag samineni6/request-logger:${env.BUILD_ID} samineni6/request-logger:latest"
       }
     }
     
@@ -28,8 +28,8 @@ pipeline {
     success {
       withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
         sh "docker login -u ${USERNAME} -p ${PASSWORD}"
-        sh "docker push brainupgrade/request-logger:${env.BUILD_ID}"
-        sh "docker push brainupgrade/request-logger:latest"
+        sh "docker push samineni6/request-logger:${env.BUILD_ID}"
+        sh "docker push samineni6/request-logger:latest"
       }
     }
   }
